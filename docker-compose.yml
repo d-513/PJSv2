@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  pjs:
+    build: .
+    container_name: pjs
+    environment:
+      - PJS_PORT=3000
+      - PJS_DBFILE=db.sqlite
+      - PJS_TOKEN=
+networks:
+  default:
+    external:
+      name: nginx_default
