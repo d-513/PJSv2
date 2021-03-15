@@ -16,7 +16,7 @@ client.on("message", async (message) => {
   if (message.mentions.members.has(client.user.id)) {
     const msg = message.content.replace(/<@(.*?)>/, "").trim();
     const res = await cleverbot(msg);
-    return message.reply(res + "\n*this is an AI response. its a dumb ai*");
+    return message.reply(res);
   }
   const parsed = parse(message, "!", { allowSpaceBeforeCommand: true });
   if (!parsed.success) return;
