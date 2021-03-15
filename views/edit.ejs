@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./head.ejs") %>
+  </head>
+  <body>
+    <div class="container">
+      <h1><a href="/">PJS - Tag Edit</a></h1>
+      This site uses JSON5. Feel free to put comments and remove quotes <br />
+      Visit <a href="https://s-url.cf/embeds" target="_blank">this link</a> for
+      more info about the embed format
+      <div class="row">
+        <div class="col-6">
+          <form method="POST">
+            <fieldset>
+              <legend>Tag edit</legend>
+
+              <label for="json">JSON embed</label>
+              <textarea name="json" id="json" cols="30" required rows="10">
+<%- json %></textarea
+              >
+              <br />
+              <input
+                type="submit"
+                value="Edit"
+                class="button primary outline"
+              />
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

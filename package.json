@@ -1,0 +1,29 @@
+{
+  "name": "pjs",
+  "version": "1.0.0",
+  "description": "Discord bot for Prismarine JS",
+  "main": "src/es.js",
+  "repository": "https://github.com/dada513/PJS",
+  "author": "dada513",
+  "license": "MIT",
+  "scripts": {
+    "start": "node -r dotenv/config src/es.js",
+    "dev": "nodemon -r dotenv/config src/es.js "
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cleverbot-free": "^1.0.5",
+    "discord-command-parser": "^1.5.3",
+    "discord.js": "discordjs/discord.js",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "json5": "^2.2.0",
+    "knex": "^0.95.2",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
