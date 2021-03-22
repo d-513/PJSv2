@@ -1,0 +1,15 @@
+What is your favorite linux distribution?;
+What OS do you use as your daily driver?;
+What is your favorite drink?;
+What is your favorite meal?;
+What code editor do you use?;
+What's the most stars you've ever gotten on a github repo?;
+Do you contribute to open source projects?;
+What's your favorite programming language?;
+Why do you use javascript?;
+What is the code project you're most proud of?;
+Do you use docker?;
+Do you accually play minecraft?;
+Do you use a linter outside of one integrated in your code editor?;
+What code formatter do you use (if any)?;
+What is in your opinion the worst programming language?;
