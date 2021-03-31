@@ -23,8 +23,10 @@ client.on("message", async (message) => {
   if (message.author.bot) return;
   if (message.mentions.members.has(client.user.id)) {
     const msg = message.content.replace(/<@(.*?)>/, "").trim();
+    message.channel.startTyping();
     const res = await cleverbot(msg);
-    return message.reply(res);
+    message.reply(res);
+    return message.channel..stopTyping();
   }
   const parsed = parse(message, "!", { allowSpaceBeforeCommand: true });
   if (!parsed.success) return;
