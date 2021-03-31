@@ -26,7 +26,7 @@ client.on("message", async (message) => {
     message.channel.startTyping();
     const res = await cleverbot(msg);
     message.reply(res);
-    return message.channel..stopTyping();
+    return message.channel.stopTyping();
   }
   const parsed = parse(message, "!", { allowSpaceBeforeCommand: true });
   if (!parsed.success) return;
