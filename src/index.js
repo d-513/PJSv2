@@ -11,7 +11,7 @@ const client = new Discord.Client({
 client.on("ready", () => {
   console.log("Bot ready");
   cron.schedule("15 17 * * *", async () => {
-    const channel = client.channels.cache.get("738645672085159946");
+    const channel = client.channels.cache.get("519952494768685086");
     const i = new AskPrismarine();
     await i.fetch();
     return channel.send(i.format(i.random()));
@@ -23,6 +23,10 @@ client.on("message", async (message) => {
   if (message.content.trim().startsWith("geeksay ")) {
     const content = message.content.trim().slice("geeksay ".length);
     return message.reply(geeksay(content));
+  } else if (message.content.startsWith("!askprismarine")) {
+    const i = new AskPrismarine();
+    await i.fetch();
+    return message.reply(i.format(i.random(), client.user));
   } else if (message.mentions.members.has(client.user.id)) {
     const msg = message.content.replace(/<@(.*?)>/, "").trim();
     message.channel.startTyping();

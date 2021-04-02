@@ -17,10 +17,12 @@ class AskPrismarine {
     return this.questions[Math.floor(Math.random() * this.questions.length)];
   }
 
-  format(q) {
+  format(q, clientUser) {
     const e = new MessageEmbed()
       .setTitle("AskPrismarine")
       .setColor("GREEN")
+      .setAuthor(clientUser.username, clientUser.avatarURL())
+      .setTimestamp()
       .setDescription(q.trim());
     return e;
   }
