@@ -8,6 +8,8 @@ const client = new Discord.Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
 
+const context = [];
+
 client.on("ready", () => {
   console.log("Bot ready");
   cron.schedule("15 17 * * *", async () => {
@@ -34,8 +36,10 @@ client.on("message", async (message) => {
   } else if (message.mentions.members.has(client.user.id)) {
     const msg = message.content.replace(/<@(.*?)>/, "").trim();
     message.channel.startTyping();
-    const res = await cleverbot(msg);
+    const res = await cleverbot(msg, context);
     message.channel.stopTyping();
+    context.push(msg);
+    context.push(res);
     message.reply(res);
   }
 });
