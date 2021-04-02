@@ -1,17 +1,49 @@
-import express from "express";
-import router from "./routes";
-import path from "path";
-import { urlencoded } from "body-parser";
-import "./discordbot";
+import Discord from "discord.js";
+import cleverbot from "cleverbot-free";
+import AskPrismarine from "./AskPrismarine";
+import cron from "node-cron";
+import rooms from "../rooms.json";
+import "@tensorflow/tfjs";
+import "@tensorflow/tfjs-node";
+import * as toxicity from "@tensorflow-models/toxicity";
 
-const app = express();
-
-app.set("view engine", "ejs");
-app.set("views", "./views");
-app.use(express.static(path.join(__dirname, "../public")));
-app.use(urlencoded({ extended: true }));
-app.use(router);
-
-app.listen(process.env.PJS_PORT, () => {
-  console.log(`Listening on ${process.env.PJS_PORT}`);
+const client = new Discord.Client({
+  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
+
+client.on("ready", () => {
+  console.log("Bot ready");
+  cron.schedule("15 17 * * *", async () => {
+    const channel = client.channels.cache.get("738645672085159946");
+    const i = new AskPrismarine();
+    await i.fetch();
+    return channel.send(i.format(i.random()));
+  });
+});
+
+client.on("message", async (message) => {
+  if (message.author.id === client.user.id) return;
+  if (message.author.bot && rooms.includes(message.channel.id)) {
+    // toxicity filter
+    const threshold = 0.9;
+    const model = await toxicity.load(threshold);
+    const results = await model.classify([message.content]);
+    if (results.length === 0) return;
+    let toxic = false;
+    results.forEach((classification) => {
+      if (classification.results[0].match === true) {
+        toxic = true;
+      }
+    });
+    if (toxic) message.react("🤡");
+  }
+  if (message.mentions.members.has(client.user.id)) {
+    const msg = message.content.replace(/<@(.*?)>/, "").trim();
+    message.channel.startTyping();
+    const res = await cleverbot(msg);
+    message.channel.stopTyping();
+    message.reply(res);
+  }
+});
+
+client.login(process.env.PJS_TOKEN);
