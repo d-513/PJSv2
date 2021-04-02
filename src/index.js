@@ -21,7 +21,11 @@ client.on("ready", () => {
 client.on("message", async (message) => {
   if (message.author.id === client.user.id) return;
   if (message.content.trim().startsWith("geeksay ")) {
-    const content = message.content.trim().slice("geeksay ".length);
+    const content = message.content
+      .trim()
+      .slice("geeksay ".length)
+      .replace(/</g, "< ")
+      .replace(/>/g, " >");
     return message.reply(geeksay(content));
   } else if (message.content.startsWith("!askprismarine")) {
     const i = new AskPrismarine();
